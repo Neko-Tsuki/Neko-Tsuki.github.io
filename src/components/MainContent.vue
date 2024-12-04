@@ -276,6 +276,8 @@ export default defineComponent({
   transition: background-color 0.3s, color 0.3s;
   width: auto; /* 自动宽度 */
   max-width: 180px; /* 最大宽度 */
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
 }
 
 @media (max-width: 600px) {
