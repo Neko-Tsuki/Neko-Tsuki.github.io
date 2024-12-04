@@ -7,17 +7,23 @@ export default defineConfig({
   plugins: [
     vue(),
     oml2d({
+      // menus:{
+      //   disable: true
+      // },
       models: [
         {
           path: 'https://model.oml2d.com/Pio/model.json',
-          scale: 0.4,
+          scale: 0.35,
           position: [0, 50],
           stageStyle: {
-            height: 300,
+            height: 260,
           },
         },
       ],
       tips: {
+        style: {
+          fontSize: '14px',
+        },
         welcomeTips: {
           message:{
             morning: 'Hanlo,上午好,今天有什么安排呢？',
@@ -37,4 +43,8 @@ export default defineConfig({
       },
     }),
   ],
+  base: '/personal_page',
+  build: {
+    outDir: 'dist',
+  }
 })
