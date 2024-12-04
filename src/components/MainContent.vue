@@ -108,7 +108,7 @@ export default defineComponent({
 }
 
 .main-content.light {
-  background-color: #E0F7FA; /* 柔和的日间背景色 */
+  background-color: #E0F7FA;
 }
 
 .profile-container {
@@ -176,11 +176,11 @@ export default defineComponent({
 }
 
 .main-content.light .description {
-  color: #555555; /* 日间模式下描述文本的颜色 */
+  color: #3f3f3f; /* 日间模式下描述文本的颜色 */
 }
 
 .main-content.light .title {
-  color: #5a5a5a; /* 日间模式下 H3 的字体颜色 */
+  color: #3a3a3a; /* 日间模式下 H3 的字体颜色 */
   background: linear-gradient(90deg, #4DB6E1, #A788FB); /* 绿色渐变 */
   -webkit-background-clip: text;
   background-clip: text;
@@ -251,7 +251,7 @@ export default defineComponent({
   font-size: 1rem;
   margin-top: 0.5rem;
   white-space: pre-line;
-  color: #b0bec5; /* 浅灰色 */
+  color: #f3f3f3; /* 浅灰色 */
 }
 
 /* 按钮部分 */
