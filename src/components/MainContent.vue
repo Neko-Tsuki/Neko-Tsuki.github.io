@@ -21,8 +21,8 @@
         <button class="blog-btn" @click="openBlog">
           <i class="fa-solid fa-blog icon"></i> BLOG
         </button>
-        <button class="friends-btn" @click="openFriends">
-          <i class="fa-solid fa-paw icon"></i> 喵友们
+        <button class="friends-btn">
+          <i class="fa-solid fa-paw icon" @click="openFriends"></i> 喵友们
         </button>
         <button class="fediverse-btn" @click="openFediverse">
           <i class="fa-solid fa-earth-americas icon"></i>喵窝
@@ -57,7 +57,7 @@ export default defineComponent({
       window.open('https://blog.shika-mori.top');
     },
     openFriends() {
-      window.open('https://blog.shika-mori.top/friends');
+      window.open('https://blog.shika-mori.top/friends/');
     },
     openFediverse() {
       window.open('https://nya.one/@hokori');
@@ -82,16 +82,14 @@ export default defineComponent({
   position: absolute;
   top: 2rem;
   left: 3.5rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #4db6e1; /* 柔和的蓝色 */
-  user-select: none;         /* 禁用文本选择 */
-  pointer-events: none;      /* 禁用鼠标事件 */
-  cursor: default;           /* 设置为默认光标 */
-}
-
-.main-content.light .site-title {
-  color: #00796B; /* 日间模式下的深蓝色 */
+  user-select: none; /* 禁用文本选择 */
+  pointer-events: none; /* 禁用鼠标事件 */
+  cursor: default; /* 设置为默认光标 */
+  margin-bottom: 10px;
+  word-wrap: break-word;
 }
 
 .main-content {
@@ -101,8 +99,11 @@ export default defineComponent({
   display: flex; /* 使用 flex 布局来调整内容位置 */
   flex-direction: column; /* 垂直布局 */
   align-items: center; /* 水平居中对齐 */
-  padding: 0; /* 去除内边距 */
+  text-align: center; /* 文本居中 */
+  max-width: 100%; /* 最大宽度为 100% */
+  padding: 20px; /* 去除内边距 */
   margin: 0; /* 去除外边距 */
+  box-sizing: border-box; /* 防止 padding 影响元素尺寸 */
   transition: background-color 0.5s ease, color 0.5s ease; /* 过渡效果 */
 }
 
@@ -153,7 +154,6 @@ export default defineComponent({
   transition: background-color 0.5s ease, color 0.5s ease; /* 添加按钮的过渡效果 */
 }
 
-
 .main-content.light .blog-btn,
 .main-content.light .friends-btn,
 .main-content.light .fediverse-btn,
@@ -171,10 +171,9 @@ export default defineComponent({
   color: #FFFFFF; /* 悬停时的按钮字体颜色 */
 }
 
-
- .main-content.light .name {
+.main-content.light .name {
    color: #00796B;
- }
+}
 
 .main-content.light .description {
   color: #555555; /* 日间模式下描述文本的颜色 */
@@ -183,9 +182,9 @@ export default defineComponent({
 .main-content.light .title {
   color: #5a5a5a; /* 日间模式下 H3 的字体颜色 */
   background: linear-gradient(90deg, #4DB6E1, #A788FB); /* 绿色渐变 */
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* 头像样式 */
@@ -203,6 +202,9 @@ export default defineComponent({
 .intro {
   text-align: left;
   flex: 1; /* 允许 intro 自适应宽度 */
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  word-wrap: break-word;
 }
 
 .text-container {
@@ -228,15 +230,14 @@ export default defineComponent({
   background-clip: text;
   color: transparent;
   position: relative;
-}
-.title {
-  white-space: pre-line;
+  white-space: pre-line; /* 保持换行 */
 }
 
 .cursor::after {
   content: '|';
   animation: blink 1s infinite;
 }
+
 @keyframes blink {
   0%, 100% {
     opacity: 1;
@@ -259,6 +260,7 @@ export default defineComponent({
   justify-content: center;
   gap: 1rem;
   margin-top: 1.5rem;
+  flex-wrap: wrap; /* 确保按钮可以换行 */
 }
 
 .blog-btn,
@@ -272,12 +274,23 @@ export default defineComponent({
   color: #ffffff; /* 白色文本 */
   border-radius: 0.375rem;
   transition: background-color 0.3s, color 0.3s;
+  width: auto; /* 自动宽度 */
+  max-width: 180px; /* 最大宽度 */
+}
+
+@media (max-width: 600px) {
+  .blog-btn,
+  .friends-btn,
+  .fediverse-btn,
+  .mode-btn {
+    width: 100%; /* 在小屏幕时设置按钮宽度为 100% */
+  }
 }
 
 .blog-btn:hover,
 .friends-btn:hover,
 .fediverse-btn:hover,
-.mode-btn:hover{
+.mode-btn:hover {
   background-color: #4db6e1; /* 悬停时的柔和蓝色背景 */
   color: #1e1e2f; /* 深色文本 */
 }
