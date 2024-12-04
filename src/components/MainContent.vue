@@ -57,7 +57,7 @@ export default defineComponent({
       window.open('https://blog.shika-mori.top');
     },
     openFriends() {
-      window.open('https://blog.shika-mori.top/friends/');
+      window.open('https://blog.shika-mori.top/friends');
     },
     openFediverse() {
       window.open('https://nya.one/@hokori');
