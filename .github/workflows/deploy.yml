@@ -25,6 +25,10 @@ jobs:
         run: |
           npm install
           npm run build
+       # 创建或更新 CNAME 文件
+      - name: Create or Update CNAME file
+        run: |
+          echo "www.shika-mori.top" > dist/CNAME
 
       # 4. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
