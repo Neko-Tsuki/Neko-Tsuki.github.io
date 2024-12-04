@@ -43,7 +43,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/personal_page',
+  base: '/',
   build: {
     outDir: 'dist',
   }
