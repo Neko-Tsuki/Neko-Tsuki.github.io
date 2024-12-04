@@ -21,8 +21,8 @@
         <button class="blog-btn" @click="openBlog">
           <i class="fa-solid fa-blog icon"></i> BLOG
         </button>
-        <button class="friends-btn">
-          <i class="fa-solid fa-paw icon" @click="openFriends"></i> 喵友们
+        <button class="friends-btn" @click="openFriends">
+          <i class="fa-solid fa-paw icon"></i> 喵友们
         </button>
         <button class="fediverse-btn" @click="openFediverse">
           <i class="fa-solid fa-earth-americas icon"></i>喵窝
