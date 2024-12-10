@@ -37,7 +37,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-
 export default defineComponent({
   data() {
     return {
@@ -54,13 +53,13 @@ export default defineComponent({
       this.isDarkMode = !(hours >= 6 && hours <= 20);
     },
     openBlog() {
-      window.open('https://blog.shika-mori.top');
+      window.location.href = 'https://blog.shika-mori.top';
     },
     openFriends() {
-      window.open('https://blog.shika-mori.top/friends/');
+      window.location.href = 'https://blog.shika-mori.top/friends/';
     },
     openFediverse() {
-      window.open('https://nya.one/@hokori');
+      window.location.href = 'https://nya.one/@hokori';
     },
     toggleMode() {
       this.isDarkMode = !this.isDarkMode;
@@ -191,12 +190,20 @@ export default defineComponent({
 .avatar {
   border: 3px solid #4db6e1; /* 柔和的蓝色边框 */
   border-radius: 50%;
+  overflow: hidden;
+  width: 15rem;
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .avatar-image {
   border-radius: 50%;
-  width: 15rem;
-  height: 15rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .intro {

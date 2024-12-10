@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "gsap": "^3.12.5",
     "vite-plugin-oh-my-live2d": "^0.19.3",
     "vue": "^3.5.12"
   },

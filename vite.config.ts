@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { oml2d } from 'vite-plugin-oh-my-live2d'
 
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
