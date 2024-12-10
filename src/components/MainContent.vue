@@ -47,6 +47,20 @@ export default defineComponent({
     };
   },
   methods: {
+    loadSnowEffect(){
+      const script = document.createElement('script');
+      script.src = '/src/assets/js/snowEffect.ts';
+      script.async = true;
+      script.onload = () => console.log('Snow effect loaded');
+      script.onerror = () => console.log('Snow effect error');
+      document.body.appendChild(script);
+    },
+    mounted() {
+      this.checkTimeForMode();
+      setTimeout(() => {
+        this.loadSnowEffect();
+      },0);
+    },
     // 检查时间，切换模式
     checkTimeForMode: function () {
       const hours = new Date().getHours();
