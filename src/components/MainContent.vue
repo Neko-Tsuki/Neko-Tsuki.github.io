@@ -5,7 +5,7 @@
     <div class="profile-container">
       <div class="profile-content flex-col md:flex-row">
         <div class="avatar">
-          <img src="/src/assets/avatar.png" alt="HokoriChan's Avatar" class="avatar-image">
+          <img src="/src/assets/padoru.png" alt="HokoriChan's Avatar" class="avatar-image">
         </div>
 
         <div class="intro">
