@@ -12,7 +12,7 @@ export default defineConfig({
       // },
       models: [
         {
-          path: 'https://model.oml2d.com/Pio/model.json',
+          path: 'https://model.hacxy.cn/Pio/model.json',
           scale: 0.35,
           position: [0, 50],
           stageStyle: {
