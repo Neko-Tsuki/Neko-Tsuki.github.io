@@ -15,7 +15,7 @@ class LeafFallEffect {
     private numLeaves: number = 50;
     private canvas: HTMLCanvasElement | null = null;
     private ctx: CanvasRenderingContext2D | null = null;
-    private emojis: string[] = ["🍀", "🍂", "🍃"];
+    private emojis: string[] = ["🍀", "🍃"];
 
     start(): void {
         if (this.running) return;
