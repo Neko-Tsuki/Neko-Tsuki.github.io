@@ -1,28 +1,31 @@
-class SnowEffect {
+class LeafFallEffect {
+    private leaves: {
+        x: number;
+        y: number;
+        speedX: number;
+        speedY: number;
+        angle: number;
+        rotationSpeed: number;
+        emoji: string;
+        size: number;
+    }[] = [];
 
-    snowflakes: any[]; // Declare the snowflakes property
-    running: boolean;
-    animationFrameId: number | null;
-    numSnowflakes: number;
+    private running: boolean = false;
+    private animationFrameId: number | null = null;
+    private numLeaves: number = 50;
     private canvas: HTMLCanvasElement | null = null;
     private ctx: CanvasRenderingContext2D | null = null;
+    private emojis: string[] = ["🍀", "🍂", "🍃"];
 
-    constructor() {
-        this.snowflakes = [];
-        this.running = false; // 控制特效的开关
-        this.animationFrameId = null;
-        this.numSnowflakes = 50; // 雪花数量
-    }
-
-    start() {
-        if (this.running) return; // 如果已经运行，则不再重复启动
+    start(): void {
+        if (this.running) return;
         this.running = true;
         this.createCanvas();
-        this.generateSnowflakes();
+        this.generateLeaves();
         this.animate();
     }
 
-    stop() {
+    stop(): void {
         this.running = false;
         if (this.animationFrameId !== null) {
             cancelAnimationFrame(this.animationFrameId);
@@ -30,88 +33,88 @@ class SnowEffect {
         this.removeCanvas();
     }
 
-    createCanvas() {
-        try {
-            this.canvas = document.createElement("canvas");
-            this.canvas.id = "snow-canvas";
-            Object.assign(this.canvas.style, {
-                position: "fixed",
-                top: "0",
-                left: "0",
-                width: "100%",
-                height: "100%",
-                pointerEvents: "none",
-                zIndex: "1000"
-            });
-            document.body.appendChild(this.canvas);
+    private createCanvas(): void {
+        if (this.canvas) return;
+        this.canvas = document.createElement("canvas");
+        this.canvas.id = "leaf-fall-canvas";
+        Object.assign(this.canvas.style, {
+            position: "fixed",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+            pointerEvents: "none",
+            zIndex: "1000",
+            backgroundColor: "transparent"
+        });
+        document.body.appendChild(this.canvas);
+        this.ctx = this.canvas.getContext("2d");
 
-            this.ctx = this.canvas.getContext("2d");
-            this.resizeCanvas();
-            window.addEventListener("resize", () => this.resizeCanvas());
-        } catch (error) {
-            console.error("Error creating canvas: ", error);
-            this.running = false; // Set running to false if canvas creation fails
-        }
+        this.resizeCanvas();
+        window.addEventListener("resize", this.resizeCanvas);
     }
 
-    removeCanvas() {
+    private removeCanvas(): void {
         if (this.canvas) {
-            window.removeEventListener("resize", this.resizeCanvas.bind(this));
+            window.removeEventListener("resize", this.resizeCanvas);
             document.body.removeChild(this.canvas);
             this.canvas = null;
+            this.ctx = null;
         }
     }
 
-    resizeCanvas() {
+    private resizeCanvas = (): void => {
         if (this.canvas) {
             this.canvas.width = window.innerWidth;
             this.canvas.height = window.innerHeight;
         }
-    }
+    };
 
-    generateSnowflakes() {
-        this.snowflakes = Array.from({ length: this.numSnowflakes }, () => ({
+    private generateLeaves(): void {
+        this.leaves = Array.from({ length: this.numLeaves }, () => ({
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
-            radius: Math.random() * 4 + 1,
-            speedX: Math.random() - 0.5,
+            speedX: (Math.random() - 0.5) * 2,
             speedY: Math.random() * 2 + 1,
+            angle: Math.random() * Math.PI * 2,
+            rotationSpeed: Math.random() * 0.03 + 0.01,
+            emoji: this.emojis[Math.floor(Math.random() * this.emojis.length)],
+            size: Math.random() * 20 + 10
         }));
     }
 
-    animate() {
-        if (!this.running || !this.ctx || !this.canvas) return; // Ensure ctx and canvas are available
+    private animate = (): void => {
+        if (!this.running || !this.ctx || !this.canvas) return;
 
-        const ctx = this.ctx;
-        const canvas = this.canvas;
-
+        const ctx = this.ctx, canvas = this.canvas;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (const flake of this.snowflakes) {
-            flake.x += flake.speedX;
-            flake.y += flake.speedY;
 
-            // 雪花超出屏幕底部时重置到顶部
-            if (flake.y > canvas.height) {
-                flake.y = -flake.radius;
-                flake.x = Math.random() * canvas.width;
+        for (const leaf of this.leaves) {
+            leaf.x += leaf.speedX;
+            leaf.y += leaf.speedY;
+            leaf.angle += leaf.rotationSpeed;
+
+            if (leaf.y > canvas.height) {
+                leaf.y = -20;
+                leaf.x = Math.random() * canvas.width;
             }
 
-            this.drawSnowflake(flake);
+            this.drawLeaf(leaf);
         }
 
-        this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
-    }
+        this.animationFrameId = requestAnimationFrame(this.animate);
+    };
 
-    drawSnowflake(flake: any) {
-        if (this.ctx) { // Check if ctx is not null
-            this.ctx.beginPath();
-            this.ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
-            this.ctx.fillStyle = "white";
-            this.ctx.fill();
-        } else {
-            console.error("Canvas context is not initialized.");
-        }
+    private drawLeaf(leaf: { x: number; y: number; angle: number; emoji: string; size: number }): void {
+        if (!this.ctx) return;
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.translate(leaf.x, leaf.y);
+        ctx.rotate(leaf.angle);
+        ctx.font = `${leaf.size}px sans-serif`;
+        ctx.fillText(leaf.emoji, -leaf.size / 2, leaf.size / 3);
+        ctx.restore();
     }
 }
 
-export default SnowEffect;
+export default LeafFallEffect;

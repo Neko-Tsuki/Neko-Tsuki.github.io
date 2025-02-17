@@ -8,10 +8,10 @@ createApp(ProfileCard).mount('#app')
 const snowEffect = new SnowEffect();
 snowEffect.start();
 
-let isSnowing = true; // 默认启用雪花特效
+let isSnowing = false; // 默认启用雪花特效
 // 添加全局的开关按钮
 const toggleButton = document.createElement("button");
-toggleButton.innerText = "❄";
+toggleButton.innerText = "🚫";
 toggleButton.style.position = "fixed";
 toggleButton.style.zIndex = "1000";
 toggleButton.style.bottom = "20px"; // 距离底部20px
@@ -26,17 +26,17 @@ toggleButton.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
 document.body.appendChild(toggleButton);
 
 // 页面加载时启动雪花特效
-snowEffect.start();
+snowEffect.stop();
 
 
 // 添加按钮点击事件，用于控制雪花特效
 toggleButton.addEventListener("click", () => {
     if (isSnowing) {
         snowEffect.stop();
-        toggleButton.innerText = "⛔";
+        toggleButton.innerText = "🚫";
     } else {
         snowEffect.start();
-        toggleButton.innerText = "❄"; // 深灰色
+        toggleButton.innerText = "🉑"; // 深灰色
     }
     isSnowing = !isSnowing;
 });
